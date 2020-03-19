@@ -26,6 +26,22 @@
 
         public DbSet<Setting> Settings { get; set; }
 
+        public DbSet<Book> Books { get; set; }
+
+        public DbSet<Author> Authors { get; set; }
+
+        public DbSet<Category> Categories { get; set; }
+
+        public DbSet<AudioFile> AudioFiles { get; set; }
+
+        public DbSet<Comment> Comments { get; set; }
+
+        public DbSet<ApplicationUserBook> ApplicationUsersBooks { get; set; }
+
+        public DbSet<AuthorBook> AuthorsBooks { get; set; }
+
+        public DbSet<CategoryBook> CategoriesBooks { get; set; }
+
         public override int SaveChanges() => this.SaveChanges(true);
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)
@@ -72,6 +88,11 @@
             {
                 foreignKey.DeleteBehavior = DeleteBehavior.Restrict;
             }
+
+            // Set composite keys for mapping tables
+            builder.Entity<ApplicationUserBook>().HasKey(x => new { x.UserId, x.BookId });
+            builder.Entity<AuthorBook>().HasKey(x => new { x.AuthorId, x.BookId });
+            builder.Entity<CategoryBook>().HasKey(x => new { x.CategoryId, x.BookId });
         }
 
         private static void SetIsDeletedQueryFilter<T>(ModelBuilder builder)
