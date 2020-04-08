@@ -19,7 +19,7 @@
 
         public string Description { get; set; }
 
-        public byte[] Cover { get; set; }
+        public string CoverUrl { get; set; }
 
         public virtual ICollection<CategoryBook> CategoriesBooks { get; set; }
 

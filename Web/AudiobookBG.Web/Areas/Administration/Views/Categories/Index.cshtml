@@ -1,0 +1,21 @@
+﻿@model AudiobookBG.Web.ViewModels.Administration.Categories.AllViewModel
+
+@{
+    ViewData["Title"] = "All";
+}
+
+<h1>All</h1>
+
+<p>
+    <a asp-action="Create" asp-controller="Categories">Create New</a>
+</p>
+@foreach (var item in Model.All)
+{
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title"><a href="@item.Url">@item.Name (@item.CategoriesBooksCount)</a></h5>
+            <a href="#" class="btn btn-primary">Edit</a>
+            <a href="#" class="btn btn-primary">Delete</a>
+        </div>
+    </div>
+}

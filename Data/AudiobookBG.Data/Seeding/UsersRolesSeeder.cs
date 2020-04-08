@@ -22,7 +22,7 @@
 
         private static async Task SeedUserRoleAsync(UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole> roleManager, ApplicationDbContext dbContext)
         {
-            if (dbContext.UserRoles.Any())
+            if (dbContext.UserRoles.Any() || !dbContext.Users.Any())
             {
                 return;
             }
