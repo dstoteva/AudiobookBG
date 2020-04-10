@@ -44,4 +44,8 @@
     <ProjectReference Include="..\AudiobookBG.Web.Infrastructure\AudiobookBG.Web.Infrastructure.csproj" />
     <ProjectReference Include="..\AudiobookBG.Web.ViewModels\AudiobookBG.Web.ViewModels.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Areas\Administration\Views\Books\" />
+  </ItemGroup>
 </Project>

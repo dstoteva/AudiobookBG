@@ -2,7 +2,6 @@
 {
     using System.Threading.Tasks;
 
-    using AudiobookBG.Data.Models;
     using AudiobookBG.Services.Data;
     using AudiobookBG.Web.ViewModels.Administration.Categories;
     using Microsoft.AspNetCore.Mvc;
@@ -27,8 +26,8 @@
 
         public IActionResult ByName(string name)
         {
-            // var viewModel = this.categoriesService.GetByName<>(name);
-            return this.View();
+            var viewModel = this.categoriesService.GetByName<CategoryViewModel>(name);
+            return this.View(viewModel);
         }
 
         public IActionResult Create()
@@ -37,9 +36,14 @@
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(CategoryInputModel categoryInputModel)
+        public async Task<IActionResult> Create(CategoryInputModel input)
         {
-            await this.categoriesService.AddAsync(new Category { Name = categoryInputModel.Name });
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(input);
+            }
+
+            await this.categoriesService.CreateAsync(input.Name);
             return this.RedirectToAction("Index");
         }
     }

@@ -9,7 +9,7 @@
     {
         IEnumerable<T> GetAll<T>(int? count = null);
 
-        Task<bool> AddAsync(Category category);
+        Task<int> CreateAsync(string name);
 
         T GetByName<T>(string name);
     }

@@ -1,1 +1,16 @@
-﻿
+﻿@model AudiobookBG.Web.ViewModels.Administration.Categories.CategoryViewModel
+@{
+    this.ViewData["Title"] = Model.Name;
+}
+<h1 class="display-3">@Model.Name</h1>
+@foreach (var item in Model.Books)
+{
+    <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src=@item.CoverUrl alt="Card image cap">
+        <div class="card-body">
+            <h5 class="card-title"><a href="@item.Url">@item.Title</a></h5>
+            <a href="#" class="btn btn-primary">Edit book</a>
+            <a href="#" class="btn btn-primary">Delete book</a>
+        </div>
+    </div>
+}

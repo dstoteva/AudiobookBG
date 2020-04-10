@@ -4,6 +4,6 @@
 
     public class AllViewModel
     {
-        public IEnumerable<CategoryAllViewModel> All;
+        public IEnumerable<CategoryAllViewModel> All { get; set; }
     }
 }

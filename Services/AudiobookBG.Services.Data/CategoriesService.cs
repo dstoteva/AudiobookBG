@@ -17,16 +17,21 @@
             this.categoriesRepository = categoriesRepository;
         }
 
-        public async Task<bool> AddAsync(Category category)
+        public async Task<int> CreateAsync(string name)
         {
-            if (this.categoriesRepository.All().Any(c => c.Name == category.Name))
+            if (this.categoriesRepository.All().Any(c => c.Name == name))
             {
-                return false;
+                return -1;
             }
+
+            var category = new Category
+            {
+                Name = name,
+            };
 
             await this.categoriesRepository.AddAsync(category);
             await this.categoriesRepository.SaveChangesAsync();
-            return true;
+            return category.Id;
         }
 
         public IEnumerable<T> GetAll<T>(int? count = null)
