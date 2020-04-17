@@ -3,8 +3,6 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
-    using AudiobookBG.Data.Models;
-
     public interface ICategoriesService
     {
         IEnumerable<T> GetAll<T>(int? count = null);

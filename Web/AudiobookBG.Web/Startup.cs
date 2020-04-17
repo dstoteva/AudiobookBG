@@ -53,6 +53,8 @@
             });
             services.AddRazorPages();
 
+            services.AddSingleton(this.configuration);
+
             // Add cloudinary
             Account account = new Account(
                 this.configuration["Cloudinary:AppName"],
@@ -61,8 +63,8 @@
 
             Cloudinary cloudinary = new Cloudinary(account);
 
-            services.AddSingleton(this.configuration);
             services.AddSingleton(cloudinary);
+            services.AddSingleton<ICloudinaryService, CloudinaryService>();
 
             // Data repositories
             services.AddScoped(typeof(IDeletableEntityRepository<>), typeof(EfDeletableEntityRepository<>));
@@ -74,6 +76,7 @@
             services.AddTransient<ISettingsService, SettingsService>();
             services.AddTransient<ICategoriesService, CategoriesService>();
             services.AddTransient<IBooksService, BooksService>();
+            services.AddTransient<IAuthorsService, AuthorsService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

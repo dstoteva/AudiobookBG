@@ -1,22 +1,24 @@
 ﻿namespace AudiobookBG.Web.Areas.Administration.Controllers
-{
-    using System.Collections.Generic;
+{ 
     using System.Threading.Tasks;
 
     using AudiobookBG.Services.Data;
     using AudiobookBG.Web.ViewModels.Administration.Books;
     using Microsoft.AspNetCore.Mvc;
-    using Newtonsoft.Json;
 
     public class BooksController : AdministrationController
     {
         private readonly IBooksService booksService;
         private readonly ICategoriesService categoriesService;
+        private readonly IAuthorsService authorsService;
+        private readonly ICloudinaryService cloudinary;
 
-        public BooksController(IBooksService booksService, ICategoriesService categoriesService)
+        public BooksController(IBooksService booksService, ICategoriesService categoriesService, IAuthorsService authorsService, ICloudinaryService cloudinary)
         {
             this.booksService = booksService;
             this.categoriesService = categoriesService;
+            this.authorsService = authorsService;
+            this.cloudinary = cloudinary;
         }
 
         public IActionResult ById(int id)
@@ -31,22 +33,24 @@
             var categories = this.categoriesService.GetAll<CategoryDropDownViewModel>();
             var viewModel = new BookCreateInputModel() { Categories = categories, };
 
-            // Add AuthorsService;
+            var authors = this.authorsService.GetAll<AuthorDropDownViewModel>();
+            viewModel.Authors = authors;
 
             return this.View(viewModel);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(string txt)
+        public async Task<IActionResult> Create(BookCreateInputModel input)
         {
-            var categoriesIds = JsonConvert.DeserializeObject<BookCreateInputModel>(txt);
             if (!this.ModelState.IsValid)
             {
-                // return this.View(input);
+                return this.View(input);
             }
 
-            return this.RedirectToAction(nameof(this.ById));
-            // , new { id = bookId }
+            var imageUrl = await this.cloudinary.UploadAsync(input.Image, "book_covers");
+            var bookId = await this.booksService.CreateAsync(input.Title, input.Description, imageUrl, input.SelectedCategories, input.SelectedAuthors);
+
+            return this.RedirectToAction(nameof(this.ById), new { id = bookId });
         }
     }
 }

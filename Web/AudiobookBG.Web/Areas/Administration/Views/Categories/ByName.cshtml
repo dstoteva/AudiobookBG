@@ -2,6 +2,11 @@
 @{
     this.ViewData["Title"] = Model.Name;
 }
+
+    <p>
+        <a asp-area="Administration" asp-action="Create" asp-controller="Books">Create New</a>
+    </p>
+
 <h1 class="text-center"><span class="badge badge-pill badge-dark">@Model.Name</span></h1>
 <div class="bg-blur container">
     <div class="row">
