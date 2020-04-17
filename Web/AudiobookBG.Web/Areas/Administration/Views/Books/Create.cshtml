@@ -1,0 +1,52 @@
+﻿@model AudiobookBG.Web.ViewModels.Administration.Books.BookCreateInputModel
+@{
+    ViewData["Title"] = "Create new Book";
+}
+<link href="~/css/fSelect.css" rel="stylesheet">
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script src="~/js/fSelect.js"></script>
+
+<h1>@ViewData["Title"]</h1>
+
+<form asp-area="Administration" asp-controller="Books" asp-action="Create" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label asp-for="Title" class="control-label"></label>
+        <input id="title" asp-for="Title" class="form-control" />
+        <span asp-validation-for="Title" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Description" class="control-label"></label>
+        <input id="description" asp-for="Description" class="form-control" />
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="SelectedCategories" class="control-label">Select Categories</label>
+        <select asp-for="SelectedCategories" class="form-control" id="listCat" multiple="multiple" asp-items="Model.Categories.Select(x => new SelectListItem(x.Name, x.Id.ToString()))">
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="SelectedAuthors" class="control-label">Select Authors</label>
+        <select asp-for="SelectedAuthors" class="form-control" id="listAuth" multiple="multiple" asp-items="Model.Authors.Select(x => new SelectListItem(x.FullName, x.Id.ToString()))">
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Image" class="control-label"></label>
+        <input type="file" name="Image">
+        <span asp-validation-for="Image" class="text-danger"></span>
+    </div>
+    <br>
+        <div class="form-group">
+            <input type="submit" value="Create" class="btn btn-primary" />
+        </div>
+</form>
+
+<script type="text/javascript">
+    $('#listCat').fSelect();
+    $('#listAuth').fSelect();
+</script>
+
+
