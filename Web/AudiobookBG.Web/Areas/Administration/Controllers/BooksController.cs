@@ -1,5 +1,5 @@
 ﻿namespace AudiobookBG.Web.Areas.Administration.Controllers
-{ 
+{
     using System.Threading.Tasks;
 
     using AudiobookBG.Services.Data;

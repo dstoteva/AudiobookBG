@@ -1,7 +1,6 @@
 ﻿namespace AudiobookBG.Web.ViewModels.Administration.Books
 {
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
     using System.Linq;
 
     using AudiobookBG.Data.Models;
@@ -24,7 +23,6 @@
         public List<int> SelectedCategories { get; set; } = new List<int>();
 
         public List<int> SelectedAuthors { get; set; } = new List<int>();
-
 
         public void CreateMappings(IProfileExpression configuration)
         {

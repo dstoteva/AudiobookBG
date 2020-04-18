@@ -8,6 +8,5 @@
         T GetById<T>(int id);
 
         Task<int> CreateAsync(string title, string description, string image, List<int> categories, List<int> authors);
-
     }
 }

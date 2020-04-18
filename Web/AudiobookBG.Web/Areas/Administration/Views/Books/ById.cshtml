@@ -16,7 +16,8 @@
             <h5 class="text-center mb-2 mt-2 d-inline"><span class="badge badge-pill badge-warning"><a href="@item.Url">@item.FullName</a></span></h5>
         }
         <img src="@Model.CoverUrl" class="img-fluid d-block mt-2 mr-auto ml-auto" width="200" height="200" />
-        <h3 class="text-white text-center mt-2">@Model.Description</h3>
+        <a href="bookAudioFiles/@Model.Id" class="btn btn-primary text-white mt-2">Go listen</a>
+        <h4 class="text-white text-center mt-2">@Model.Description</h4>
         <a href="/Products/Delete?id=@Model.Id" class="btn btn-danger text-white mt-2">Delete Product</a>
         <a href="/Products/Delete?id=@Model.Id" class="btn btn-info text-white mt-2">Edit Product</a>
     </div>

@@ -3,12 +3,22 @@
     this.ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome to @GlobalConstants.SystemName!</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-
-    @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
-    {
-    <a asp-area="Administration" asp-controller="Dashboard" asp-action="Index">Administration</a>
-    }
+<div class="page-header header-filter" data-parallax="true" style="background-image: url('img/HomePage.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 ml-auto mr-auto">
+                <div class="brand text-center">
+                    <h1>Welcome to @GlobalConstants.SystemName!</h1>
+                    <h3 class="title text-center">Listen to your favourite books</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="main main-raised">
+    <div class="container">
+        <div class="section text-center">
+            <h2 class="title">Your main section here</h2>
+        </div>
+    </div>
 </div>

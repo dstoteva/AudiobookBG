@@ -77,6 +77,7 @@
             services.AddTransient<ICategoriesService, CategoriesService>();
             services.AddTransient<IBooksService, BooksService>();
             services.AddTransient<IAuthorsService, AuthorsService>();
+            services.AddTransient<IAudioFilesService, AudioFilesService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -119,6 +120,8 @@
                         endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
                         endpoints.MapAreaControllerRoute("adminCategory", "Administration", "{name:minlength(3)}", new { controller = "Categories", action = "ByName" });
                         endpoints.MapAreaControllerRoute("adminBook", "Administration", "{id:int}", new { controller = "Books", action = "ById" });
+                        endpoints.MapAreaControllerRoute("adminAudioFile", "Administration", "audioFiles/{id:int}", new { controller = "AudioFiles", action = "ById" });
+                        endpoints.MapAreaControllerRoute("adminAudioFilesInBook", "Administration", "bookAudioFiles/{bookId:int}", new { controller = "AudioFIles", action = "ByBookId" });
                         endpoints.MapRazorPages();
                     });
         }

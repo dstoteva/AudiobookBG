@@ -1,11 +1,12 @@
-﻿using CloudinaryDotNet;
-using CloudinaryDotNet.Actions;
-using Microsoft.AspNetCore.Http;
-using System.IO;
-using System.Threading.Tasks;
-
-namespace AudiobookBG.Services.Data
+﻿namespace AudiobookBG.Services.Data
 {
+    using System.IO;
+    using System.Threading.Tasks;
+
+    using CloudinaryDotNet;
+    using CloudinaryDotNet.Actions;
+    using Microsoft.AspNetCore.Http;
+
     public class CloudinaryService : ICloudinaryService
     {
         private readonly Cloudinary cloudinary;
@@ -29,11 +30,24 @@ namespace AudiobookBG.Services.Data
 
             using (var destinationStream = new MemoryStream(destinationImage))
             {
-                ImageUploadParams uploadParams = new ImageUploadParams
+                var uploadParams = new RawUploadParams();
+
+                if (folderName == "book_covers")
                 {
-                    Folder = folderName,
-                    File = new FileDescription(file.Name, destinationStream),
-                };
+                    uploadParams = new ImageUploadParams
+                    {
+                        Folder = folderName,
+                        File = new FileDescription(file.Name, destinationStream),
+                    };
+                }
+                else
+                {
+                    uploadParams = new VideoUploadParams
+                    {
+                        Folder = folderName,
+                        File = new FileDescription(file.Name, destinationStream),
+                    };
+                }
 
                 result = await this.cloudinary.UploadAsync(uploadParams);
             }
