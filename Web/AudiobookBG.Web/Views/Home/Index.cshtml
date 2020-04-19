@@ -1,4 +1,7 @@
 ﻿@using AudiobookBG.Common
+@using AudiobookBG.Data.Models
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
 @{
     this.ViewData["Title"] = "Home Page";
 }
@@ -9,7 +12,11 @@
             <div class="col-md-8 ml-auto mr-auto">
                 <div class="brand text-center">
                     <h1>Welcome to @GlobalConstants.SystemName!</h1>
-                    <h3 class="title text-center">Listen to your favourite books</h3>
+                    @if (this.SignInManager.IsSignedIn(this.User))
+                    {
+                        <h3 class="title text-center">Listen to your favourite books</h3>
+                    }
+                    <h3 class="title text-center"><a class="text-white" style="display:inline-block; text-decoration: underline;" asp-area="Identity" asp-page="/Account/Login">Login</a> or <a class="text-white" style="display:inline-block; text-decoration: underline;" asp-area="Identity" asp-page="/Account/Register">Register</a> and let's get started!</h3>
                 </div>
             </div>
         </div>

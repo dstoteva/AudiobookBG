@@ -2,15 +2,29 @@
 {
     using System.Diagnostics;
 
+    using AudiobookBG.Services.Data;
     using AudiobookBG.Web.ViewModels;
-
+    using AudiobookBG.Web.ViewModels.Home;
     using Microsoft.AspNetCore.Mvc;
 
     public class HomeController : BaseController
     {
+        private readonly IBooksService booksService;
+
+        public HomeController(IBooksService booksService)
+        {
+            this.booksService = booksService;
+        }
+
         public IActionResult Index()
         {
-            return this.View();
+            var books = this.booksService.GetMostViewd<HomeBookViewModel>();
+
+            var viewModel = new HomeViewModel
+            {
+                Books = books,
+            };
+            return this.View(viewModel);
         }
 
         public IActionResult Privacy()

@@ -1,4 +1,7 @@
 ﻿@using AudiobookBG.Common
+@using AudiobookBG.Services.Data
+@using AudiobookBG.Web.ViewModels.Categories
+@inject ICategoriesService CategoriesService
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,7 +39,7 @@
     <header>
         <nav class="navbar navbar-color-on-scroll navbar-transparent fixed-top navbar-expand-lg bg-primary" color-on-scroll="100" id="sectionsNav">
             <div class="container">
-                <a class="navbar-brand text-white" asp-area="" asp-controller="Home" asp-action="Index">@GlobalConstants.SystemName</a>
+                <a style="font-weight:bold" class="navbar-brand text-white" asp-area="" asp-controller="Home" asp-action="Index">@GlobalConstants.SystemName</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -46,6 +49,17 @@
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
                             <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        <li class="dropdown nav-item">
+                            <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                                <i class="material-icons">apps</i> Categories
+                            </a>
+                            <div class="dropdown-menu">
+                                @foreach (var cat in this.CategoriesService.GetAll<CategoryDropDownViewModel>())
+                                {
+                                    <a href="/@cat.Name" class="dropdown-item">@cat.Name</a>
+                                }
+                            </div>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
@@ -57,8 +71,8 @@
     </header>
 
 
-        <partial name="_CookieConsentPartial" />
-            @this.RenderBody()
+    <partial name="_CookieConsentPartial" />
+    @this.RenderBody()
 
 
     <footer class="footer" data-background-color="black">
@@ -74,7 +88,6 @@
         <script src="~/lib/jquery/dist/jquery.js" asp-append-version="true"></script>
         <script src="~/lib/jquery-validation/dist/jquery.validate.js" asp-append-version="true"></script>
         <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js" asp-append-version="true"></script>
-        <script src="~/lib/bootstrap/dist/js/bootstrap.js" asp-append-version="true"></script>
         <script src="~/js/site.js" asp-append-version="true"></script>
         <script src="~/js/core/popper.min.js" type="text/javascript"></script>
         <script src="~/js/core/bootstrap-material-design.min.js" type="text/javascript"></script>
@@ -88,7 +101,6 @@
         <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
         <script src="~/lib/jquery-validation/dist/jquery.validate.min.js" asp-append-version="true"></script>
         <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js" asp-append-version="true"></script>
-        <script src="~/lib/bootstrap/dist/js/bootstrap.min.js" asp-append-version="true"></script>
         <script src="~/js/site.min.js" asp-append-version="true"></script>
         <script src="~/js/core/popper.min.js" type="text/javascript"></script>
         <script src="~/js/core/bootstrap-material-design.min.js" type="text/javascript"></script>

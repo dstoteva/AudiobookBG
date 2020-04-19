@@ -27,7 +27,7 @@
                 return;
             }
 
-            var user = await userManager.FindByNameAsync("infdtoteva@gmail.com");
+            var user = await userManager.FindByEmailAsync("infdtoteva@gmail.com");
             var role = await roleManager.FindByNameAsync("Administrator");
 
             await dbContext.UserRoles.AddAsync(new IdentityUserRole<string>

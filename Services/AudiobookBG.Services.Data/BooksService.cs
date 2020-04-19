@@ -42,5 +42,13 @@
 
             return book;
         }
+
+        public IEnumerable<T> GetMostViewd<T>()
+        {
+            IQueryable<Book> books = this.booksRepository.All().OrderByDescending(b => b.AudioFiles.Sum(af => af.Views))
+                .Take(5);
+
+            return books.To<T>().ToList();
+        }
     }
 }
