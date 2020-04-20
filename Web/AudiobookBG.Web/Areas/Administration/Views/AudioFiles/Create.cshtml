@@ -3,23 +3,35 @@
     ViewData["Title"] = "Create new AudioFile";
     ViewData["BookId"] = Model.BookIdFromGetMethod;
 }
-<h1>@ViewData["Title"]</h1>
+<div class="page-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-6 ml-auto mr-auto">
+                <div class="card">
 
-<form asp-area="Administration" asp-controller="AudioFiles" asp-action="Create" method="post" enctype="multipart/form-data">
-    <input type="hidden" asp-for="BookId" value=@ViewData["BookId"]>
-    <div class="form-group">
-        <label asp-for="Title" class="control-label"></label>
-        <input id="title" asp-for="Title" class="form-control" />
-        <span asp-validation-for="Title" class="text-danger"></span>
-    </div>
+                    <form asp-area="Administration" asp-controller="AudioFiles" asp-action="Create" method="post" enctype="multipart/form-data">
+                        <div class="card-header card-header-primary text-center">
+                            <h4 class="card-title">@ViewData["Title"]</h4>
+                        </div>
+                        <input type="hidden" asp-for="BookId" value=@ViewData["BookId"]>
+                        <div class="form-group">
+                            <label asp-for="Title" class="control-label"></label>
+                            <input id="title" asp-for="Title" class="form-control" />
+                            <span asp-validation-for="Title" class="text-danger"></span>
+                        </div>
 
-    <div class="form-group">
-        <label asp-for="AudioFile" class="control-label"></label>
-        <input type="file" name="AudioFile">
-        <span asp-validation-for="AudioFile" class="text-danger"></span>
+                        <div class="form-group">
+                            <label asp-for="AudioFile" class="control-label"></label>
+                            <input type="file" name="AudioFile">
+                            <span asp-validation-for="AudioFile" class="text-danger"></span>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <input type="submit" value="Create" class="btn btn-primary" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-    <br>
-    <div class="form-group">
-        <input type="submit" value="Create" class="btn btn-primary" />
-    </div>
-</form>
+</div>

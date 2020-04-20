@@ -1,7 +1,5 @@
 ﻿namespace AudiobookBG.Web.Controllers
 {
-    using System.Collections.Generic;
-
     using AudiobookBG.Services.Data;
     using AudiobookBG.Web.ViewModels.Categories;
     using Microsoft.AspNetCore.Mvc;
@@ -17,7 +15,8 @@
 
         public IActionResult ByName(string name)
         {
-            return this.View();
+            var viewModel = this.categoriesService.GetByName<CategoryViewModel>(name);
+            return this.View(viewModel);
         }
     }
 }

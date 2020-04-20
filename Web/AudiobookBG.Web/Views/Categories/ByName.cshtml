@@ -1,1 +1,28 @@
-﻿<h1>Hi!</h1>
+﻿@model AudiobookBG.Web.ViewModels.Categories.CategoryViewModel
+@{
+    this.ViewData["Title"] = Model.Name;
+}
+
+<div class="page-header header-filter" data-parallax="true" style="background-image: url('img/HomePage.jpg')">
+    <div class="bg-blur container">
+        <div class="row">
+            <div class="col-md-8 ml-auto mr-auto">
+                <div class="header-primary text-center">
+                    <h4 class="card-title">@ViewData["Title"]</h4>
+                </div>
+                <p>
+                    <a class="btn btn-primary" asp-area="Administration" asp-action="Create" asp-controller="Books">Create New</a>
+                </p>
+
+                <div class="row">
+                    @foreach (var item in Model.Books)
+                    {
+                        <div class="col-3 text-center">
+                            <a href="@item.Url"><img src="@item.CoverUrl" width="200" height="200" alt="Rounded Image" class="rounded img-fluid" /></a>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

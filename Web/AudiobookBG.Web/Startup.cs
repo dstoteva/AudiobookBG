@@ -118,8 +118,9 @@
                     {
                         endpoints.MapControllerRoute("areaRoute", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
                         endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
+                        endpoints.MapControllerRoute("book", "books/{id:int}", new { controller = "Books", action = "ById"});
                         endpoints.MapControllerRoute("category", "{name:minlength(3)}", new { controller = "Categories", action = "ByName" });
-                        endpoints.MapAreaControllerRoute("adminCategory", "Administration", "{name:minlength(3)}", new { controller = "Categories", action = "ByName" });
+                        endpoints.MapAreaControllerRoute("adminCategory", "Administration", "а/{name:minlength(3)}", new { controller = "Categories", action = "ByName" });
                         endpoints.MapAreaControllerRoute("adminBook", "Administration", "{id:int}", new { controller = "Books", action = "ById" });
                         endpoints.MapAreaControllerRoute("adminAudioFile", "Administration", "audioFiles/{id:int}", new { controller = "AudioFiles", action = "ById" });
                         endpoints.MapAreaControllerRoute("adminAudioFilesInBook", "Administration", "bookAudioFiles/{bookId:int}", new { controller = "AudioFIles", action = "ByBookId" });

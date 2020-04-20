@@ -2,6 +2,7 @@
 @using AudiobookBG.Data.Models
 @using Microsoft.AspNetCore.Identity
 @inject SignInManager<ApplicationUser> SignInManager
+@model AudiobookBG.Web.ViewModels.Home.HomeViewModel
 @{
     this.ViewData["Title"] = "Home Page";
 }
@@ -16,7 +17,10 @@
                     {
                         <h3 class="title text-center">Listen to your favourite books</h3>
                     }
+                    else
+                    {
                     <h3 class="title text-center"><a class="text-white" style="display:inline-block; text-decoration: underline;" asp-area="Identity" asp-page="/Account/Login">Login</a> or <a class="text-white" style="display:inline-block; text-decoration: underline;" asp-area="Identity" asp-page="/Account/Register">Register</a> and let's get started!</h3>
+                    }
                 </div>
             </div>
         </div>
@@ -25,7 +29,15 @@
 <div class="main main-raised">
     <div class="container">
         <div class="section text-center">
-            <h2 class="title">Your main section here</h2>
+            <h2 class="title">Check out our most popular books</h2>
+            <div class="row">
+                @foreach (var book in @Model.Books)
+                {
+                    <div class="col-sm-2 ml-auto">
+                        <a href="books/@book.Id"><img src="@book.CoverUrl" alt="Rounded Image" class="rounded img-fluid"></a>
+                    </div>
+                }
+            </div>
         </div>
     </div>
 </div>
