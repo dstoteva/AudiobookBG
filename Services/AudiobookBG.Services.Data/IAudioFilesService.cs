@@ -10,5 +10,7 @@
         Task<int> CreateAsync(string title, string audioUrl, int bookId);
 
         IEnumerable<T> GetByBookId<T>(int bookId);
+
+        Task IncrementViews(int audioId);
     }
 }

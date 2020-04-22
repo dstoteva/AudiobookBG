@@ -20,10 +20,9 @@
                             <span asp-validation-for="Title" class="text-danger"></span>
                         </div>
 
-                        <div class="form-group">
-                            <label asp-for="AudioFile" class="control-label"></label>
-                            <input type="file" name="AudioFile">
-                            <span asp-validation-for="AudioFile" class="text-danger"></span>
+                        <div class="custom-file">
+                            <input asp-for="AudioFile" type="file" class="custom-file-input border-dark">
+                            <label asp-for="AudioFile" class="custom-file-label text-truncate">Choose file...</label>
                         </div>
                         <br>
                         <div class="form-group">
@@ -35,3 +34,10 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+    $('.custom-file-input').on('change', function () {
+        let fileName = $(this).val().split('\\').pop();
+        $(this).next('.custom-file-label').addClass("selected").html(fileName);
+    });
+</script>

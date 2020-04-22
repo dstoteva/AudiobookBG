@@ -5,6 +5,7 @@
     using AudiobookBG.Services.Data;
     using AudiobookBG.Web.ViewModels.Administration.AudioFiles;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Routing;
 
     public class AudioFilesController : AdministrationController
     {
@@ -38,18 +39,7 @@
             var audioUrl = await this.cloudinary.UploadAsync(input.AudioFile, "audio_files");
             await this.audioFilesService.CreateAsync(input.Title, audioUrl, input.BookId);
 
-            return this.RedirectToAction(nameof(this.ByBookId), new { bookId = input.BookId });
-        }
-
-        public IActionResult ByBookId(int bookId)
-        {
-            var audioFiles = this.audioFilesService.GetByBookId<AudioFileInBookViewModel>(bookId);
-            var viewModel = new AllViewModel
-            {
-                AudioFiles = audioFiles,
-            };
-
-            return this.View(viewModel);
+            return this.RedirectToAction("ByBookId", new RouteValueDictionary(new { area = "", controller = "AudioFiles", action = "ByBookId", bookId = input.BookId }));
         }
     }
 }

@@ -1,0 +1,56 @@
+﻿@model AudiobookBG.Web.ViewModels.Books.BookViewModel
+@{
+    this.ViewData["Title"] = Model.Title;
+}
+
+<div class="page-header header-filter" data-parallax="true" style="background-image: url('../img/HomePage.jpg')">
+    <div class="container container-fluid">
+        <div class="split left">
+            <div class="centered">
+                <br>
+                <img src=@Model.CoverUrl style="height: 470px; width:auto" class="img-fluid pull-left mr-2">
+                <br>
+                <a class="btn btn-primary btn-lg" asp-area="" asp-controller="AudioFiles" asp-action="ByBookId" asp-route-bookId=@Model.Id>Go Listen</a>
+            </div>
+
+        </div>
+        <div class="split right">
+            <div class="centered">
+                @foreach (var item in Model.Categories)
+                {
+                    <h3 class="text-center mb-2 mt-2 d-inline"><span class="badge badge-primary badge-success"><a href="@item.Url">@item.Name</a></span></h3>
+                }
+                <h1>
+                    @Model.Title
+                </h1>
+                @foreach (var item in Model.Authors)
+                {
+                    <h5 class="text-center mb-2 mt-2 d-inline"><span class="badge badge-pill badge-info">@item.FullName</span></h5>
+                }
+                <p>
+                    @Model.Description
+                </p>
+
+                @if (this.User.IsInRole("Administrator"))
+                {
+                    <a asp-area="Administration" asp-controller="Books" asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger text-white mt-2">Delete Book</a>
+                    <a asp-area="Administration" asp-controller="Books" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-info text-white mt-2">Edit Book</a>
+                }
+            </div>
+        </div>
+
+    </div>
+</div>
+<br>
+<div class="main main-raised">
+    <div class="container">
+        <div class="section text-center">
+                @foreach (var comment in @Model.Comments)
+                {
+                    <div class="row">
+                        @comment.Content
+                    </div>
+                }
+        </div>
+    </div>
+</div>

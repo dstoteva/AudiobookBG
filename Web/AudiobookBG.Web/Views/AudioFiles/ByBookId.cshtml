@@ -1,0 +1,75 @@
+﻿@model AudiobookBG.Web.ViewModels.AudioFiles.AudioFilesListViewModel
+@{
+    this.ViewData["Title"] = Model.Title;
+}
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<div class="page-header header-filter" data-parallax="true" style="background-image: url('../img/HomePage.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 ml-auto mr-auto">
+                <div class="brand text-center">
+                    <h1>@this.ViewData["Title"]</h1>
+                    @if (this.User.IsInRole("Administrator"))
+                    {
+                        <a asp-area="Administration" asp-controller="AudioFiles" asp-action="Create" asp-route-bookId=@Model.Id class="btn btn-primary text-white mt-2">Create new</a>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="main main-raised">
+    <div class="container">
+        <div class="section text-center">
+            <div id="links" class="list-group">
+                <form id="viewsForm" method="post"></form>
+                @foreach (var af in Model.AudioFiles)
+                {
+                    <a id="@af.Id" class="list-group-item list-group-item-action flex-column align-items-start btn" href="@af.Url">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1 text-primary font-weight-bold">@af.Title</h5>
+
+                        </div>
+                        <small class="text-white font-weight-bold">@af.Views Views</small>
+                        @if (this.User.IsInRole("Administrator"))
+                        {
+                            <small>
+                                <a asp-area="Administration" asp-controller="AudioFiles" asp-action="Delete" asp-route-id="@af.Id" class="btn btn-danger text-white mt-2">Delete Book</a>
+                                <a asp-area="Administration" asp-controller="AudioFiles" asp-action="Edit" asp-route-id="@af.Id" class="btn btn-info text-white mt-2">Edit Book</a>
+                            </small>
+                        }
+                    </a>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function f1(audioId) {
+            var token = $("#viewsForm input[name=__RequestVerificationToken]").val();
+
+            $.ajax({
+                type: "POST",
+                url: "/AudioFiles/CountViews",
+                data: { audioId: audioId },
+                headers: { 'RequestVerificationToken': token },
+                error: function (e) {
+                    console.log(e);
+                }
+            });
+        }
+
+        $(document).ready(function () {
+            var links = document.querySelectorAll(".list-group-item");
+            links.forEach(link => {
+                var id = link.id;
+                link.addEventListener("click", function () {
+                    f1(id);
+                });
+            });
+        });
+
+    </script>
+}

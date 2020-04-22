@@ -21,12 +21,11 @@
         {
             var audioFile = new AudioFile
             {
+                BookId = bookId,
                 Title = title,
                 Views = 0,
                 Url = audioUrl,
             };
-
-            audioFile.BookId = bookId;
 
             await this.audioFilesRepository.AddAsync(audioFile);
             await this.audioFilesRepository.SaveChangesAsync();
@@ -51,6 +50,14 @@
                 .FirstOrDefault();
 
             return audioFile;
+        }
+
+        public async Task IncrementViews(int audioId)
+        {
+            var audioFile = this.audioFilesRepository.All().FirstOrDefault(x => x.Id == audioId);
+
+            audioFile.Views++;
+            await this.audioFilesRepository.SaveChangesAsync();
         }
     }
 }
