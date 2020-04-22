@@ -39,7 +39,7 @@
             var audioUrl = await this.cloudinary.UploadAsync(input.AudioFile, "audio_files");
             await this.audioFilesService.CreateAsync(input.Title, audioUrl, input.BookId);
 
-            return this.RedirectToAction("ByBookId", new RouteValueDictionary(new { area = "", controller = "AudioFiles", action = "ByBookId", bookId = input.BookId }));
+            return this.RedirectToAction("ByBookId", "AudioFiles", new { bookId = input.BookId, Area = "" });
         }
     }
 }

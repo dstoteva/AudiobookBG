@@ -5,7 +5,6 @@
     using AudiobookBG.Services.Data;
     using AudiobookBG.Web.ViewModels.Administration.Books;
     using Microsoft.AspNetCore.Mvc;
-    using Microsoft.AspNetCore.Routing;
 
     public class BooksController : AdministrationController
     {
@@ -44,7 +43,7 @@
             var imageUrl = await this.cloudinary.UploadAsync(input.Image, "book_covers");
             var bookId = await this.booksService.CreateAsync(input.Title, input.Description, imageUrl, input.SelectedCategories, input.SelectedAuthors);
 
-            return this.RedirectToAction("ById", new RouteValueDictionary(new { controler = "Books", action = "ById", id = bookId }));
+            return this.RedirectToAction("ById", "Books", new { id = bookId, Area = "" });
         }
     }
 }

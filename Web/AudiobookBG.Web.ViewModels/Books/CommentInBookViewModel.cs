@@ -2,6 +2,7 @@
 {
     using AudiobookBG.Data.Models;
     using AudiobookBG.Services.Mapping;
+    using System;
 
     public class CommentInBookViewModel : IMapFrom<Comment>
     {
@@ -10,5 +11,7 @@
         public string Content { get; set; }
 
         public string UserUserName { get; set; }
+
+        public DateTime CreatedOn { get; set; }
     }
 }

@@ -11,6 +11,7 @@
                 <img src=@Model.CoverUrl style="height: 470px; width:auto" class="img-fluid pull-left mr-2">
                 <br>
                 <a class="btn btn-primary btn-lg" asp-area="" asp-controller="AudioFiles" asp-action="ByBookId" asp-route-bookId=@Model.Id>Go Listen</a>
+
             </div>
 
         </div>
@@ -44,13 +45,71 @@
 <br>
 <div class="main main-raised">
     <div class="container">
-        <div class="section text-center">
-                @foreach (var comment in @Model.Comments)
-                {
-                    <div class="row">
-                        @comment.Content
+        <div class="card-header card-header-primary ">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="title">
+                        <h3 class="card-title">Comments</h3>
                     </div>
-                }
+                </div>
+                <div style="float:right; display:inline-block;" class="col-md-6 text-right">
+                    <a class="btn btn-primary" onclick="ShowCommentForm()">Add Comment</a>
+                </div>
+            </div>
+        </div>
+        <div id="addCommentForm" style="display:none">
+            <form method="post" asp-controller="Comments" asp-action="Create" class="form">
+                <input type="hidden" name="BookId" value="@Model.Id" />
+                <div class="card-header card-header-primary text-center">
+                    <h4 class="card-title">Add comment</h4>
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <label for="Content" class="bmd-label-static"></label>
+                        <textarea placeholder="Enter your comment..." name="Content" id="content" class="form-control"></textarea>
+                    </div>
+                    <div class="card-footer text-center">
+                        <button type="submit" class="btn btn-primary">Post comment</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="section">
+            @foreach (var comment in Model.Comments)
+            {
+                <div class="container-fluid mt-100">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card mb-4">
+                                <div class="card-header">
+                                    <div class="media flex-wrap w-100 align-items-center">
+                                        <img src="https://res.cloudinary.com/asdw3fg/image/upload/v1587573550/book_covers/User_icon_BLACK-01_hkrzkn.png" height="40" width="40" class="rounded img-fluid" />
+                                        <div class="media-body ml-3">
+                                            @comment.UserUserName
+                                            <div class="small text-muted">
+                                                @comment.CreatedOn.ToLocalTime().ToString("g")
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <article>
+                                        @comment.Content
+                                    </article>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
         </div>
     </div>
 </div>
+
+@section Scripts{
+    <script>
+        function ShowCommentForm() {
+            $("#addCommentForm").show();
+        }
+    </script>
+}

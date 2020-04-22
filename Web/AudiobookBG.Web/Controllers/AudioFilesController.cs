@@ -19,7 +19,6 @@
 
         public IActionResult ByBookId(int bookId)
         {
-            // var audioFiles = this.audioFilesService.GetByBookId<AudioFileViewModel>(bookId);
             var viewModel = this.booksService.GetById<AudioFilesListViewModel>(bookId);
 
             return this.View(viewModel);

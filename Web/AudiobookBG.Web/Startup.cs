@@ -78,6 +78,7 @@
             services.AddTransient<IBooksService, BooksService>();
             services.AddTransient<IAuthorsService, AuthorsService>();
             services.AddTransient<IAudioFilesService, AudioFilesService>();
+            services.AddTransient<ICommentsService, CommentsService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
