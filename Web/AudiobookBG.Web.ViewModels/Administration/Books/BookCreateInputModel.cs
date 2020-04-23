@@ -26,7 +26,7 @@
 
         public void CreateMappings(IProfileExpression configuration)
         {
-            configuration.CreateMap<Book, BookViewModel>()
+            configuration.CreateMap<Book, BookCreateInputModel>()
                 .ForMember(x => x.Authors, y => y.MapFrom(ab => ab.AuthorsBooks.Select(b => b.Author)))
                 .ForMember(x => x.Categories, y => y.MapFrom(cb => cb.CategoriesBooks.Select(b => b.Category)));
         }

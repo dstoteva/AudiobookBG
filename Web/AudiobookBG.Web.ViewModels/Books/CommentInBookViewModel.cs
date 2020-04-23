@@ -1,8 +1,9 @@
 ﻿namespace AudiobookBG.Web.ViewModels.Books
 {
+    using System;
+
     using AudiobookBG.Data.Models;
     using AudiobookBG.Services.Mapping;
-    using System;
 
     public class CommentInBookViewModel : IMapFrom<Comment>
     {

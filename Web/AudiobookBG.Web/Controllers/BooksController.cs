@@ -2,6 +2,7 @@
 {
     using AudiobookBG.Services.Data;
     using AudiobookBG.Web.ViewModels.Books;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
     public class BooksController : BaseController
@@ -13,14 +14,15 @@
             this.booksService = booksService;
         }
 
+        [Authorize]
         public IActionResult ById(int id)
         {
-            ///if (!this.User.Identity.IsAuthenticated)
-            ///{
-            ///    return this.RedirectToAction("Login", "Account", new { area = "Identity" });
-            ///}
-
             var viewModel = this.booksService.GetById<BookViewModel>(id);
+            if (viewModel == null)
+            {
+                return this.NotFound();
+            }
+
             return this.View(viewModel);
         }
     }

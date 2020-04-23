@@ -1,4 +1,5 @@
 ﻿@model AudiobookBG.Web.ViewModels.Books.BookViewModel
+@model AudiobookBG.Web.ViewModels.Books.CommentInBookViewModel
 @{
     this.ViewData["Title"] = Model.Title;
 }
@@ -67,8 +68,10 @@
                 </div>
                 <div class="card-body">
                     <div class="form-group">
-                        <label for="Content" class="bmd-label-static"></label>
-                        <textarea placeholder="Enter your comment..." name="Content" id="content" class="form-control"></textarea>
+                        var content = Model.Comments.Select(c => c.Content);
+                        <label asp-for="Comments.Select(c => c.Content)" class="custom-control-label"></label>
+                        <textarea asp-for="Comments.Select(c => c.Content)" placeholder="Enter your comment..." class="form-control"></textarea>
+                        <span asp-validation-for="Comments.Select(c => c.Content)" class="text-danger"></span>
                     </div>
                     <div class="card-footer text-center">
                         <button type="submit" class="btn btn-primary">Post comment</button>
