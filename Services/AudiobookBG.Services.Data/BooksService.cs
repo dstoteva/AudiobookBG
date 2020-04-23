@@ -7,6 +7,7 @@
     using AudiobookBG.Data.Common.Repositories;
     using AudiobookBG.Data.Models;
     using AudiobookBG.Services.Mapping;
+    using Microsoft.EntityFrameworkCore;
 
     public class BooksService : IBooksService
     {
@@ -50,6 +51,23 @@
                 .Take(5);
 
             return books.To<T>().ToList();
+        }
+
+        public async Task<string> DeleteAsync(int id)
+        {
+            var book = this.booksRepository.All().Where(c => c.Id == id).FirstOrDefault();
+            var categoryName = book.CategoriesBooks.Select(b => b.Category.Name).FirstOrDefault();
+
+            foreach (var item in book.CategoriesBooks)
+            {
+                book.CategoriesBooks.Remove(item);
+            }
+
+            //this.booksRepository.Update(book);
+            this.booksRepository.Delete(book);
+            await this.booksRepository.SaveChangesAsync();
+
+            return categoryName;
         }
     }
 }

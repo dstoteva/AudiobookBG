@@ -21,8 +21,10 @@
                             <div class="card mt-2 col-md-3" style="width: 18rem;">
                                 <div class="card-body">
                                     <h5 class="card-title"><a href="@item.Url">@item.Name (@item.CategoriesBooksCount)</a></h5>
-                                    <a asp-area="Administration" asp-controller="Categories" asp-action="Edit" class="btn btn-info">Edit</a>
-                                    <a asp-area="Administration" asp-controller="Categories" asp-action="Delete" class="btn btn-danger">Delete</a>
+                                    <a asp-area="Administration" asp-controller="Categories" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-info">Edit</a>
+                                    <form asp-action="Delete" asp-route-id="@item.Id" method ="post">
+                                        <input type="submit" class="btn btn-danger" value="Delete">
+                                    </form>
                                 </div>
                             </div>
                         }

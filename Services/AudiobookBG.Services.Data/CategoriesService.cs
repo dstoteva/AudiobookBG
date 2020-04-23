@@ -34,6 +34,20 @@
             return category.Id;
         }
 
+        public async Task DeleteAsync(int id)
+        {
+            var category = this.categoriesRepository.All().Where(c => c.Id == id).FirstOrDefault();
+
+            foreach (var item in category.CategoriesBooks)
+            {
+                category.CategoriesBooks.Clear();
+            }
+
+            //this.categoriesRepository.Update(category);
+            this.categoriesRepository.Delete(category);
+            await this.categoriesRepository.SaveChangesAsync();
+        }
+
         public IEnumerable<T> GetAll<T>(int? count = null)
         {
             IQueryable<Category> query = this.categoriesRepository.All().OrderBy(x => x.Name);

@@ -34,7 +34,9 @@
 
                 @if (this.User.IsInRole("Administrator"))
                 {
-                    <a asp-area="Administration" asp-controller="Books" asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger text-white mt-2">Delete Book</a>
+                    <form asp-area="Administration" asp-action="Delete" asp-route-id="@Model.Id" method="post">
+                        <input type="submit" class="btn btn-danger" value="Delete">
+                    </form>
                     <a asp-area="Administration" asp-controller="Books" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-info text-white mt-2">Edit Book</a>
                 }
             </div>

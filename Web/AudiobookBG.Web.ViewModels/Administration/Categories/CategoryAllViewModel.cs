@@ -5,6 +5,8 @@
 
     public class CategoryAllViewModel : IMapFrom<Category>
     {
+        public int Id { get; set; }
+
         public string Name { get; set; }
 
         public int CategoriesBooksCount { get; set; }

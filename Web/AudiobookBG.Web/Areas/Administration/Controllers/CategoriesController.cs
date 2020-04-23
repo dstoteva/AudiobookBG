@@ -24,12 +24,6 @@
             return this.View(viewModel);
         }
 
-        public IActionResult ByName(string name)
-        {
-            var viewModel = this.categoriesService.GetByName<CategoryViewModel>(name);
-            return this.View(viewModel);
-        }
-
         public IActionResult Create()
         {
             return this.View();
@@ -38,12 +32,14 @@
         [HttpPost]
         public async Task<IActionResult> Create(CategoryInputModel input)
         {
-            if (!this.ModelState.IsValid)
-            {
-                return this.View(input);
-            }
-
             await this.categoriesService.CreateAsync(input.Name);
+            return this.RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id)
+        {
+            await this.categoriesService.DeleteAsync(id);
             return this.RedirectToAction("Index");
         }
     }

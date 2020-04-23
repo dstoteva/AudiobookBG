@@ -10,5 +10,7 @@
         Task<int> CreateAsync(string name);
 
         T GetByName<T>(string name);
+
+        Task DeleteAsync(int id);
     }
 }

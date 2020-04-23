@@ -45,5 +45,12 @@
 
             return this.RedirectToAction("ById", "Books", new { id = bookId, Area = "" });
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var categoryName = await this.booksService.DeleteAsync(id);
+            return this.RedirectToAction("ByName", "Categories", new { name = categoryName, Area = "" });
+        }
     }
 }
