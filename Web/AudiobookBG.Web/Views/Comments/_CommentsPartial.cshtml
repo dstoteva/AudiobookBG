@@ -1,0 +1,20 @@
+﻿@model AudiobookBG.Web.ViewModels.Comments.CommentCreateInputModel
+
+<div id="addCommentForm" style="display:none">
+    <form method="post" asp-controller="Comments" asp-action="Create" class="form">
+        <input type="hidden" name="BookId" value="@Model.BookId" />
+        <div class="card-header card-header-primary text-center">
+            <h4 class="card-title text-black">Add comment</h4>
+        </div>
+        <div class="card-body">
+            <div class="form-group">
+                <label asp-for="Content" class="control-label"></label>
+                <textarea asp-for="Content" placeholder="Enter your comment..." class="form-control"></textarea>
+                <span asp-validation-for="Content" class="text-danger"></span>
+            </div>
+            <div class="card-footer text-center">
+                <button type="submit" class="btn btn-primary">Post comment</button>
+            </div>
+        </div>
+    </form>
+</div>

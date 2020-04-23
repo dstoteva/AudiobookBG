@@ -1,5 +1,5 @@
-﻿@model AudiobookBG.Web.ViewModels.Books.BookViewModel
-@model AudiobookBG.Web.ViewModels.Books.CommentInBookViewModel
+﻿@using AudiobookBG.Web.ViewModels.Comments
+@model AudiobookBG.Web.ViewModels.Books.BookViewModel
 @{
     this.ViewData["Title"] = Model.Title;
 }
@@ -60,25 +60,7 @@
                 </div>
             </div>
         </div>
-        <div id="addCommentForm" style="display:none">
-            <form method="post" asp-controller="Comments" asp-action="Create" class="form">
-                <input type="hidden" name="BookId" value="@Model.Id" />
-                <div class="card-header card-header-primary text-center">
-                    <h4 class="card-title text-white">Add comment</h4>
-                </div>
-                <div class="card-body">
-                    <div class="form-group">
-                        var content = Model.Comments.Select(c => c.Content);
-                        <label asp-for="Comments.Select(c => c.Content)" class="custom-control-label"></label>
-                        <textarea asp-for="Comments.Select(c => c.Content)" placeholder="Enter your comment..." class="form-control"></textarea>
-                        <span asp-validation-for="Comments.Select(c => c.Content)" class="text-danger"></span>
-                    </div>
-                    <div class="card-footer text-center">
-                        <button type="submit" class="btn btn-primary">Post comment</button>
-                    </div>
-                </div>
-            </form>
-        </div>
+        <partial name="~/Views/Comments/_CommentsPartial.cshtml" model="new CommentCreateInputModel { BookId = Model.Id }")>
         <div class="section">
             @foreach (var comment in Model.Comments)
             {
