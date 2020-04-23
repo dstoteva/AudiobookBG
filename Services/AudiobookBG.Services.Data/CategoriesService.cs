@@ -43,6 +43,16 @@
             await this.categoriesRepository.SaveChangesAsync();
         }
 
+        public async Task EditAsync(int id, string name)
+        {
+            var category = this.categoriesRepository.All().Where(c => c.Id == id).FirstOrDefault();
+
+            category.Name = name;
+
+            this.categoriesRepository.Update(category);
+            await this.categoriesRepository.SaveChangesAsync();
+        }
+
         public IEnumerable<T> GetAll<T>(int? count = null)
         {
             IQueryable<Category> query = this.categoriesRepository.All().OrderBy(x => x.Name);
@@ -53,6 +63,13 @@
             }
 
             return query.To<T>().ToList();
+        }
+
+        public T GetById<T>(int id)
+        {
+            var category = this.categoriesRepository.All().Where(a => a.Id == id).To<T>().FirstOrDefault();
+
+            return category;
         }
 
         public T GetByName<T>(string name)

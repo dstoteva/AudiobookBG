@@ -45,6 +45,18 @@
             await this.authorsRepository.SaveChangesAsync();
         }
 
+        public async Task EditAsync(int id, string firstName, string middleName, string lastName)
+        {
+            var author = this.authorsRepository.All().Where(c => c.Id == id).FirstOrDefault();
+
+            author.FirstName = firstName;
+            author.MiddleName = middleName;
+            author.LastName = lastName;
+
+            this.authorsRepository.Update(author);
+            await this.authorsRepository.SaveChangesAsync();
+        }
+
         public IEnumerable<T> GetAll<T>(int? count = null)
         {
             IQueryable<Author> query = this.authorsRepository.All().OrderBy(x => x.FirstName)
@@ -60,7 +72,9 @@
 
         public T GetById<T>(int id)
         {
-            throw new System.NotImplementedException();
+            var author = this.authorsRepository.All().Where(a => a.Id == id).To<T>().FirstOrDefault();
+
+            return author;
         }
     }
 }

@@ -48,5 +48,19 @@
             await this.authorsService.DeleteAsync(id);
             return this.RedirectToAction("Index");
         }
+
+        public IActionResult Edit(int id)
+        {
+            var viewModel = this.authorsService.GetById<EditAuthorViewModel>(id);
+
+            return this.View(viewModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(EditAuthorViewModel viewModel)
+        {
+            await this.authorsService.EditAsync(viewModel.Id, viewModel.FirstName, viewModel.MiddleName, viewModel.LastName);
+            return this.RedirectToAction("Index");
+        }
     }
 }

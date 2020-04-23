@@ -1,0 +1,32 @@
+﻿@model AudiobookBG.Web.ViewModels.Administration.AudioFiles.EditAudioFileViewModel
+@{
+    ViewData["Title"] = "Edit AudioFile";
+}
+<div class="page-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-6 ml-auto mr-auto">
+                <div class="card">
+
+                    <form asp-area="Administration" asp-controller="AudioFiles" asp-action="Edit" method="post" enctype="multipart/form-data">
+                        <div class="card-header card-header-primary text-center">
+                            <h4 class="card-title">@ViewData["Title"]</h4>
+                        </div>
+                        <input type="hidden" asp-for="BookId" />
+                        <input type="hidden" asp-for="Id" />
+
+                        <div class="form-group">
+                            <label asp-for="Title" class="control-label"></label>
+                            <input id="title" asp-for="Title" class="form-control" />
+                            <span asp-validation-for="Title" class="text-danger"></span>
+                        </div>
+                        <br>
+                        <div class="form-group text-center">
+                            <input type="submit" value="Change AudioFile" class="btn btn-primary" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

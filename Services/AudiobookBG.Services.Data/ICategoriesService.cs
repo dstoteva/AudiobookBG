@@ -12,5 +12,9 @@
         T GetByName<T>(string name);
 
         Task DeleteAsync(int id);
+
+        T GetById<T>(int id);
+
+        Task EditAsync(int id, string name);
     }
 }

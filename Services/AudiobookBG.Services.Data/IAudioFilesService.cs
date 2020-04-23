@@ -14,5 +14,7 @@
         Task IncrementViews(int audioId);
 
         Task<int> DeleteAsync(int id);
+
+        Task EditAsync(int id, string title);
     }
 }

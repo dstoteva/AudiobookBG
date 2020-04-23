@@ -5,7 +5,6 @@
     using AudiobookBG.Services.Data;
     using AudiobookBG.Web.ViewModels.Administration.AudioFiles;
     using Microsoft.AspNetCore.Mvc;
-    using Microsoft.AspNetCore.Routing;
 
     public class AudioFilesController : AdministrationController
     {
@@ -48,6 +47,20 @@
             var bookId = await this.audioFilesService.DeleteAsync(id);
 
             return this.RedirectToAction("ById", "Books", new { id = bookId, Area = "" });
+        }
+
+        public IActionResult Edit(int id)
+        {
+            var viewModel = this.audioFilesService.GetById<EditAudioFileViewModel>(id);
+
+            return this.View(viewModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(EditAudioFileViewModel viewModel)
+        {
+            await this.audioFilesService.EditAsync(viewModel.Id, viewModel.Title);
+            return this.RedirectToAction("ByBookId", "AudioFiles", new { bookId = viewModel.BookId, Area = "" });
         }
     }
 }

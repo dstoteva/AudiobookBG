@@ -44,6 +44,16 @@
             return bookId;
         }
 
+        public async Task EditAsync(int id, string title)
+        {
+            var audioFile = this.audioFilesRepository.All().Where(af => af.Id == id).FirstOrDefault();
+
+            audioFile.Title = title;
+
+            this.audioFilesRepository.Update(audioFile);
+            await this.audioFilesRepository.SaveChangesAsync();
+        }
+
         public IEnumerable<T> GetByBookId<T>(int bookId)
         {
             var audioFiles = this.audioFilesRepository.All().Where(af => af.BookId == bookId)

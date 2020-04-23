@@ -42,5 +42,19 @@
             await this.categoriesService.DeleteAsync(id);
             return this.RedirectToAction("Index");
         }
+
+        public IActionResult Edit(int id)
+        {
+            var viewModel = this.categoriesService.GetById<EditCategoryViewModel>(id);
+
+            return this.View(viewModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(EditCategoryViewModel viewModel)
+        {
+            await this.categoriesService.EditAsync(viewModel.Id, viewModel.Name);
+            return this.RedirectToAction("Index");
+        }
     }
 }

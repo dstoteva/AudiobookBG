@@ -7,10 +7,12 @@
     {
         IEnumerable<T> GetAll<T>(int? count = null);
 
-        Task<int> CreateAsync(string firstName, string lastName, string middleName);
-
         T GetById<T>(int id);
 
+        Task<int> CreateAsync(string firstName, string lastName, string middleName);
+
         Task DeleteAsync(int id);
+
+        Task EditAsync(int id, string firstName, string middleName, string lastName);
     }
 }
