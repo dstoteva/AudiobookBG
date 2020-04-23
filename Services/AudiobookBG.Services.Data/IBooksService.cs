@@ -12,5 +12,7 @@
         IEnumerable<T> GetMostViewd<T>();
 
         Task<string> DeleteAsync(int id);
+
+        Task EditAsync(int id, string title, string description, List<int> categories, List<int> authors, string image);
     }
 }

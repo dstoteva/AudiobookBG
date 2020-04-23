@@ -35,11 +35,6 @@
         [HttpPost]
         public async Task<IActionResult> Create(BookCreateInputModel input)
         {
-            if (!this.ModelState.IsValid)
-            {
-                return this.View(input);
-            }
-
             var imageUrl = await this.cloudinary.UploadAsync(input.Image, "book_covers");
             var bookId = await this.booksService.CreateAsync(input.Title, input.Description, imageUrl, input.SelectedCategories, input.SelectedAuthors);
 
@@ -51,6 +46,31 @@
         {
             var categoryName = await this.booksService.DeleteAsync(id);
             return this.RedirectToAction("ByName", "Categories", new { name = categoryName, Area = "" });
+        }
+
+        public IActionResult Edit(int id)
+        {
+            var categories = this.categoriesService.GetAll<CategoryDropDownViewModel>();
+            var authors = this.authorsService.GetAll<AuthorDropDownViewModel>();
+
+            var viewModel = this.booksService.GetById<EditBookViewModel>(id);
+            viewModel.Categories = categories;
+            viewModel.Authors = authors;
+
+            return this.View(viewModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(EditBookViewModel viewModel)
+        {
+            var imageUrl = "";
+            if (viewModel.Image != null)
+            {
+                imageUrl = await this.cloudinary.UploadAsync(viewModel.Image, "book_covers");
+            }
+
+            await this.booksService.EditAsync(viewModel.Id, viewModel.Title, viewModel.Description, viewModel.SelectedCategories, viewModel.SelectedAuthors, imageUrl);
+            return this.RedirectToAction("ById", "Books", new { id = viewModel.Id, Area = ""});
         }
     }
 }
