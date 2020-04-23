@@ -5,5 +5,7 @@
     public interface ICommentsService
     {
         Task Create(int bookId, string content, string userId);
+
+        Task<int> Delete(int id);
     }
 }

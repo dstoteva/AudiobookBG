@@ -41,5 +41,12 @@
             await this.authorsService.CreateAsync(input.FirstName, input.LastName, input.MiddleName);
             return this.RedirectToAction("Index");
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id)
+        {
+            await this.authorsService.DeleteAsync(id);
+            return this.RedirectToAction("Index");
+        }
     }
 }

@@ -33,6 +33,17 @@
             return audioFile.Id;
         }
 
+        public async Task<int> DeleteAsync(int id)
+        {
+            var audioFile = this.audioFilesRepository.All().Where(c => c.Id == id).FirstOrDefault();
+            var bookId = audioFile.BookId;
+
+            this.audioFilesRepository.Delete(audioFile);
+            await this.audioFilesRepository.SaveChangesAsync();
+
+            return bookId;
+        }
+
         public IEnumerable<T> GetByBookId<T>(int bookId)
         {
             var audioFiles = this.audioFilesRepository.All().Where(af => af.BookId == bookId)

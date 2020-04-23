@@ -41,5 +41,13 @@
 
             return this.RedirectToAction("ByBookId", "AudioFiles", new { bookId = input.BookId, Area = "" });
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var bookId = await this.audioFilesService.DeleteAsync(id);
+
+            return this.RedirectToAction("ById", "Books", new { id = bookId, Area = "" });
+        }
     }
 }

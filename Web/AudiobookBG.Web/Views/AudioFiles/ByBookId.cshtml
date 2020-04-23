@@ -31,14 +31,17 @@
 
                         </div>
                         <small class="text-white font-weight-bold">@af.Views Views</small>
-                        @if (this.User.IsInRole("Administrator"))
-                        {
-                            <small>
-                                <a asp-area="Administration" asp-controller="AudioFiles" asp-action="Delete" asp-route-id="@af.Id" class="btn btn-danger text-white mt-2">Delete Book</a>
-                                <a asp-area="Administration" asp-controller="AudioFiles" asp-action="Edit" asp-route-id="@af.Id" class="btn btn-info text-white mt-2">Edit Book</a>
-                            </small>
-                        }
+
                     </a>
+                    <div class="card-footer">
+                    @if (this.User.IsInRole("Administrator"))
+                    {
+                        <form style="display:inline-block" asp-area="Administration" asp-controller="AudioFiles" asp-action="Delete" asp-route-id="@af.Id" method="post">
+                            <input type="submit" class="btn btn-danger" value="Delete">
+                        </form>
+                        <a style="display:inline-block" asp-area="Administration" asp-controller="AudioFiles" asp-action="Edit" asp-route-id="@af.Id" class="btn btn-info">Edit </a>
+                    }
+                    </div>
                 }
             </div>
         </div>

@@ -12,5 +12,7 @@
         IEnumerable<T> GetByBookId<T>(int bookId);
 
         Task IncrementViews(int audioId);
+
+        Task<int> DeleteAsync(int id);
     }
 }

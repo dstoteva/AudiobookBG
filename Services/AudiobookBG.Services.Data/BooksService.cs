@@ -12,10 +12,14 @@
     public class BooksService : IBooksService
     {
         private readonly IDeletableEntityRepository<Book> booksRepository;
+        private readonly IDeletableEntityRepository<Comment> commentsRepository;
+        private readonly IDeletableEntityRepository<AudioFile> audioFilesRepository;
 
-        public BooksService(IDeletableEntityRepository<Book> booksRepository)
+        public BooksService(IDeletableEntityRepository<Book> booksRepository, IDeletableEntityRepository<Comment> commentsRepository, IDeletableEntityRepository<AudioFile> audioFilesRepository)
         {
             this.booksRepository = booksRepository;
+            this.commentsRepository = commentsRepository;
+            this.audioFilesRepository = audioFilesRepository;
         }
 
         public async Task<int> CreateAsync(string title, string description, string image, List<int> categories, List<int> authors)
@@ -58,12 +62,22 @@
             var book = this.booksRepository.All().Where(c => c.Id == id).FirstOrDefault();
             var categoryName = book.CategoriesBooks.Select(b => b.Category.Name).FirstOrDefault();
 
-            foreach (var item in book.CategoriesBooks)
+            var comments = this.commentsRepository.All().Where(c => c.BookId == book.Id);
+            var audioFiles = this.audioFilesRepository.All().Where(af => af.BookId == book.Id);
+
+            foreach (var item in comments)
             {
-                book.CategoriesBooks.Remove(item);
+                this.commentsRepository.Delete(item);
             }
 
-            //this.booksRepository.Update(book);
+            foreach (var item in audioFiles)
+            {
+                this.audioFilesRepository.Delete(item);
+            }
+
+            book.AuthorsBooks.Clear();
+            book.CategoriesBooks.Clear();
+
             this.booksRepository.Delete(book);
             await this.booksRepository.SaveChangesAsync();
 

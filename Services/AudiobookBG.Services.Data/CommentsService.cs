@@ -1,5 +1,6 @@
 ﻿namespace AudiobookBG.Services.Data
 {
+    using System.Linq;
     using System.Threading.Tasks;
 
     using AudiobookBG.Data.Common.Repositories;
@@ -25,6 +26,17 @@
 
             await this.commentsRepository.AddAsync(comment);
             await this.commentsRepository.SaveChangesAsync();
+        }
+
+        public async Task<int> Delete(int id)
+        {
+            var comment = this.commentsRepository.All().Where(c => c.Id == id).FirstOrDefault();
+            var bookId = comment.BookId;
+
+            this.commentsRepository.Delete(comment);
+            await this.commentsRepository.SaveChangesAsync();
+
+            return bookId;
         }
     }
 }

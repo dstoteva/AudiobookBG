@@ -36,6 +36,15 @@
             return author.Id;
         }
 
+        public async Task DeleteAsync(int id)
+        {
+            var author = this.authorsRepository.All().Where(c => c.Id == id).FirstOrDefault();
+            author.AuthorsBooks.Clear();
+
+            this.authorsRepository.Delete(author);
+            await this.authorsRepository.SaveChangesAsync();
+        }
+
         public IEnumerable<T> GetAll<T>(int? count = null)
         {
             IQueryable<Author> query = this.authorsRepository.All().OrderBy(x => x.FirstName)

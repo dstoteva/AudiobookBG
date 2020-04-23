@@ -34,10 +34,10 @@
 
                 @if (this.User.IsInRole("Administrator"))
                 {
-                    <form asp-area="Administration" asp-action="Delete" asp-route-id="@Model.Id" method="post">
+                    <form style="display:inline-block" asp-area="Administration" asp-action="Delete" asp-route-id="@Model.Id" method="post">
                         <input type="submit" class="btn btn-danger" value="Delete">
                     </form>
-                    <a asp-area="Administration" asp-controller="Books" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-info text-white mt-2">Edit Book</a>
+                    <a style="display:inline-block" asp-area="Administration" asp-controller="Books" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-info text-white mt-2">Edit Book</a>
                 }
             </div>
         </div>
@@ -63,7 +63,7 @@
             <form method="post" asp-controller="Comments" asp-action="Create" class="form">
                 <input type="hidden" name="BookId" value="@Model.Id" />
                 <div class="card-header card-header-primary text-center">
-                    <h4 class="card-title">Add comment</h4>
+                    <h4 class="card-title text-white">Add comment</h4>
                 </div>
                 <div class="card-body">
                     <div class="form-group">
@@ -91,11 +91,18 @@
                                             <div class="small text-muted">
                                                 @comment.CreatedOn.ToLocalTime().ToString("g")
                                             </div>
+                                            @if (this.User.IsInRole("Administrator"))
+                                            {
+                                                <form style="float:right; display:inline-block;" asp-area="Administration" asp-action="Delete" asp-controller="Comments" asp-route-id="@comment.Id" method="post">
+                                                    <input type="submit" class="btn btn-danger" value="Delete">
+                                                </form>
+                                            }
                                         </div>
                                     </div>
                                 </div>
                                 <div class="card-body">
                                     <article>
+                                        <br>
                                         @comment.Content
                                     </article>
                                 </div>

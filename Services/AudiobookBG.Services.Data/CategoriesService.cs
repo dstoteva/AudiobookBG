@@ -37,13 +37,8 @@
         public async Task DeleteAsync(int id)
         {
             var category = this.categoriesRepository.All().Where(c => c.Id == id).FirstOrDefault();
+            category.CategoriesBooks.Clear();
 
-            foreach (var item in category.CategoriesBooks)
-            {
-                category.CategoriesBooks.Clear();
-            }
-
-            //this.categoriesRepository.Update(category);
             this.categoriesRepository.Delete(category);
             await this.categoriesRepository.SaveChangesAsync();
         }
