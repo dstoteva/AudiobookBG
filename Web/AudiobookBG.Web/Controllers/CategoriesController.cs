@@ -18,7 +18,10 @@
             var viewModel = this.categoriesService.GetByName<CategoryViewModel>(name);
             if (viewModel == null)
             {
-                return this.NotFound();
+                if (viewModel == null)
+                {
+                    return this.View("NotFound");
+                }
             }
 
             return this.View(viewModel);

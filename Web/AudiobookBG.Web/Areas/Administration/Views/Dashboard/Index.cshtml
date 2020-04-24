@@ -3,11 +3,12 @@
     this.ViewData["Title"] = "Admin dashboard";
 }
 
-    <div class="page-header header-filter">
-        <div class="container">
+    <div class="page-header header-filter" data-parallax="true" style="background-image: url('../../img/AdminBackground.jpg')">
+        <div class="container text-center">
             <h1>@this.ViewData["Title"]</h1>
-
-            <a class="btn btn-primary" asp-area="Administration" asp-controller="Categories" asp-action="Index">Go to Categories</a>
-            <a class="btn btn-primary" asp-area="Administration" asp-controller="Authors" asp-action="Index">Go to Authors</a>
+            <div class="text-center">
+                <a class="btn btn-primary" asp-area="Administration" asp-controller="Categories" asp-action="Index">Go to Categories</a>
+                <a class="btn btn-primary" asp-area="Administration" asp-controller="Authors" asp-action="Index">Go to Authors</a>
+            </div>
         </div>
 </div>

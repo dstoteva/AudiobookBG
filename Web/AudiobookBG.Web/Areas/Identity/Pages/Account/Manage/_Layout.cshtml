@@ -1,32 +1,35 @@
 ﻿@{
     Layout = "/Views/Shared/_Layout.cshtml";
 }
-<div class="page-header header-filter" data-parallax="true">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8 ml-auto mr-auto">
-                <div class="brand text-center">
-                    <h1>Manage your account</h1>
-
-                </div>
-                <h4>Change your account settings</h4>
-                <div>
-                    <hr />
-                    <div class="row">
-                        <div class="col-md-3">
-                            <partial name="_ManageNav" />
-                        </div>
-                        <div class="col-md-9">
-                            @RenderBody()
-                        </div>
+<div class="page-header header-filter" data-parallax="true" style="background-image: url('../../../img/Background.jpg'); background-size: cover; background-position:top center;">
+    <div class="container bg-blur">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-md-8 ml-auto mr-auto">
+                    <div class=" text-center">
+                        <h3>Manage your account</h3>
                     </div>
-
                 </div>
             </div>
+            <hr />
+            <div class="row">
+                <div class="col-md-3">
+                    <partial name="_ManageNav" />
+                </div>
+                <div class="col-md-6">
+                        @RenderBody()
+                        </div>
+                </div>
         </div>
     </div>
 </div>
 
 @section Scripts {
     @RenderSection("Scripts", required: false)
+<script>
+    $(document).ready(function () {
+        $(".col-md-6")[1].style.right = "50%";
+        $(".col-md-6")[1].style.left = "25%";
+    });
+    </script>
 }

@@ -4,7 +4,7 @@
     this.ViewData["Title"] = Model.Title;
 }
 
-<div class="page-header header-filter" data-parallax="true" style="background-image: url('../img/HomePage.jpg')">
+<div class="page-header header-filter" data-parallax="true" style="background-image: url('../img/Background.jpg')">
     <div class="container container-fluid">
         <div class="split left">
             <div class="centered">
@@ -12,9 +12,7 @@
                 <img src=@Model.CoverUrl style="height: 470px; width:auto" class="img-fluid pull-left mr-2">
                 <br>
                 <a class="btn btn-primary btn-lg" asp-area="" asp-controller="AudioFiles" asp-action="ByBookId" asp-route-bookId=@Model.Id>Go Listen</a>
-
             </div>
-
         </div>
         <div class="split right">
             <div class="centered">
@@ -35,7 +33,7 @@
 
                 @if (this.User.IsInRole("Administrator"))
                 {
-                    <form style="display:inline-block" asp-area="Administration" asp-action="Delete" asp-route-id="@Model.Id" method="post">
+                    <form style="        display: inline-block" asp-area="Administration" asp-action="Delete" asp-route-id="@Model.Id" method="post">
                         <input type="submit" class="btn btn-danger" value="Delete">
                     </form>
                     <a style="display:inline-block" asp-area="Administration" asp-controller="Books" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-info text-white mt-2">Edit Book</a>

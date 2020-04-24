@@ -20,7 +20,7 @@
             var viewModel = this.booksService.GetById<BookViewModel>(id);
             if (viewModel == null)
             {
-                return this.NotFound();
+                return this.View("NotFound");
             }
 
             return this.View(viewModel);

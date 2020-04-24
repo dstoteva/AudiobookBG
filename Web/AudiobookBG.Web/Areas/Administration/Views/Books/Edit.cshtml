@@ -6,7 +6,7 @@
 <script src="~/lib/jquery/dist/jquery.js"></script>
 <script src="~/js/fSelect.js"></script>
 
-<div class="page-header">
+<div class="page-header header-filter" data-parallax="true" style="background-image: url('../../../img/AdminBackground.jpg')">
     <div class="container">
         <div class="row">
             <div class="col-lg-4 col-md-6 ml-auto mr-auto">
@@ -15,7 +15,7 @@
                         <div class="card-header card-header-primary text-center">
                             <h4 class="card-title">@ViewData["Title"]</h4>
                         </div>
-                        <input type="hidden" asp-for="Id"/>
+                        <input type="hidden" asp-for="Id" />
                         <div class="form-group">
                             <label asp-for="Title" class="control-label"></label>
                             <input id="title" asp-for="Title" class="form-control" />

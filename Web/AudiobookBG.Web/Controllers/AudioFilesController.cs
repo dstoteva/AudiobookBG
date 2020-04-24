@@ -24,7 +24,7 @@
             var viewModel = this.booksService.GetById<AudioFilesListViewModel>(bookId);
             if (viewModel == null)
             {
-                return this.NotFound();
+                return this.View("NotFound");
             }
 
             return this.View(viewModel);

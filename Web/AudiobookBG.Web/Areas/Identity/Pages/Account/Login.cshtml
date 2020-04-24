@@ -4,7 +4,7 @@
 @{
     ViewData["Title"] = "Log in";
 }
-<div class="page-header header-filter" style="background-image: url('../../../img/HomePage.jpg'); background-size: cover; background-position:top center;">
+<div class="page-header header-filter" style="background-image: url('../../../img/Background.jpg'); background-size: cover; background-position:top center;">
     <div class="container">
         <div class="row">
             <div class="col-lg-4 col-md-6 ml-auto mr-auto">
@@ -25,27 +25,29 @@
                                 <input asp-for="Input.Password" class="form-control" />
                                 <span asp-validation-for="Input.Password" class="form-control-feedback"></span>
                             </div>
-                            <div class="input-group">
-                                <div class="checkbox">
-                                    <label asp-for="Input.RememberMe">
-                                        <input asp-for="Input.RememberMe" />
-                                        @Html.DisplayNameFor(m => m.Input.RememberMe)
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="footer text-center">
-                                <button type="submit" class="btn btn-primary">Log in</button>
-                            </div>
                             <div class="text-center">
                                 <div>
                                     <a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
                                 </div>
-                                <div>
-                                    <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
+                            </div>
+                                <div class="input-group">
+                                    <div class="checkbox">
+                                        <label asp-for="Input.RememberMe">
+                                            <input asp-for="Input.RememberMe" />
+                                            @Html.DisplayNameFor(m => m.Input.RememberMe)
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="footer text-center">
+                                    <button type="submit" class="btn btn-primary">Log in</button>
+                                </div>
+                                <div class="text-center">
+                                    <div>
+                                        <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </form>
+</form>
                 </div>
             </div>
         </div>
