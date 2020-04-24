@@ -28,9 +28,9 @@
 
             await service.Create(bookId, "Comment's content", "userGruidId1");
 
-            var actualBookId = await repository.All().FirstOrDefaultAsync();
+            var actualBook = await repository.All().FirstOrDefaultAsync();
 
-            Assert.Equal(bookId, actualBookId.BookId);
+            Assert.Equal(bookId, actualBook.BookId);
         }
 
         [Fact]

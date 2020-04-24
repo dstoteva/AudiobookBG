@@ -30,6 +30,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Data\AudiobookBG.Data\AudiobookBG.Data.csproj" />
     <ProjectReference Include="..\..\Services\AudiobookBG.Services.Data\AudiobookBG.Services.Data.csproj" />
+    <ProjectReference Include="..\..\Web\AudiobookBG.Web.ViewModels\AudiobookBG.Web.ViewModels.csproj" />
   </ItemGroup>
 
 </Project>
