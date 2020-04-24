@@ -1,5 +1,7 @@
 ﻿namespace AudiobookBG.Data.Models
 {
+    using System.ComponentModel.DataAnnotations;
+
     using AudiobookBG.Data.Common.Models;
 
     public class Comment : BaseDeletableModel<int>
@@ -8,6 +10,7 @@
         {
         }
 
+        [Required]
         public string Content { get; set; }
 
         public string UserId { get; set; }
