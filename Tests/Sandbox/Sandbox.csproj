@@ -41,7 +41,6 @@
     <ProjectReference Include="..\..\Services\AudiobookBG.Services.Data\AudiobookBG.Services.Data.csproj" />
     <ProjectReference Include="..\..\Services\AudiobookBG.Services.Mapping\AudiobookBG.Services.Mapping.csproj" />
     <ProjectReference Include="..\..\Services\AudiobookBG.Services.Messaging\AudiobookBG.Services.Messaging.csproj" />
-    <ProjectReference Include="..\..\Services\AudiobookBG.Services\AudiobookBG.Services.csproj" />
   </ItemGroup>
 
 </Project>

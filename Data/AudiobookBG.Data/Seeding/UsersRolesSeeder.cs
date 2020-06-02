@@ -26,15 +26,17 @@
             {
                 return;
             }
-
-            var user = await userManager.FindByEmailAsync("infdtoteva@gmail.com");
-            var role = await roleManager.FindByNameAsync("Administrator");
-
-            await dbContext.UserRoles.AddAsync(new IdentityUserRole<string>
+            else
             {
-                RoleId = role.Id,
-                UserId = user.Id,
-            });
+                var user = userManager.Users.FirstOrDefault();
+                var role = await roleManager.FindByNameAsync("Administrator");
+
+                await dbContext.UserRoles.AddAsync(new IdentityUserRole<string>
+                {
+                    RoleId = role.Id,
+                    UserId = user.Id,
+                });
+            }
         }
     }
 }
