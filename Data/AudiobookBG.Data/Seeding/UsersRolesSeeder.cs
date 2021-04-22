@@ -22,20 +22,27 @@
 
         private static async Task SeedUserRoleAsync(UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole> roleManager, ApplicationDbContext dbContext)
         {
-            if (dbContext.UserRoles.Any() || !dbContext.Users.Any())
+            // Adding default admin with: username: admin, email: admin@gmail.com, password: 123456
+            if (!dbContext.Users.Any())
             {
-                return;
-            }
-            else
-            {
-                var user = userManager.Users.FirstOrDefault();
                 var role = await roleManager.FindByNameAsync("Administrator");
+                var adminUserPassword = "123456";
+                var adminUser = new ApplicationUser
+                {
+                    UserName = "admin",
+                    Email = "admin@gmail.com",
+                };
 
+                await userManager.CreateAsync(adminUser, adminUserPassword);
                 await dbContext.UserRoles.AddAsync(new IdentityUserRole<string>
                 {
                     RoleId = role.Id,
-                    UserId = user.Id,
+                    UserId = adminUser.Id,
                 });
+            }
+            else
+            {
+                return;
             }
         }
     }
